@@ -1,0 +1,81 @@
+[build-system]
+requires = [ "hatchling" ]
+build-backend = "hatchling.build"
+
+[project]
+name = "hello-streamlit2"
+dynamic = [ "version" ]
+description = 'A streamlit app with Hatch'
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = [  ]
+authors = [
+  { name = "heiwa4126", email = "heiwa4126@gmail.com" },
+]
+classifiers = [
+  # "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  # "Programming Language :: Python :: 3.8",
+  # "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  # "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "streamlit>=1.34.0",
+]
+
+[project.urls]
+Documentation = "https://github.com/heiwa4126/hello-streamlit2#readme"
+Issues = "https://github.com/heiwa4126/hello-streamlit2/issues"
+Source = "https://github.com/heiwa4126/hello-streamlit2"
+
+[tool.hatch.version]
+path = "src/hello_streamlit2/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/hello_streamlit2 tests}"
+
+[tool.coverage.run]
+source_pkgs = [
+  "hello_streamlit2",
+  "tests",
+]
+branch = true
+parallel = true
+omit = [
+  "src/hello_streamlit2/__about__.py",
+]
+
+[tool.coverage.paths]
+hello_streamlit2 = [
+  "src/hello_streamlit2",
+  "*/hello-streamlit2/src/hello_streamlit2",
+]
+tests = [
+  "tests",
+  "*/hello-streamlit2/tests",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+
+[tool.hatch.envs.default.scripts]
+dev = "streamlit run src/hello_streamlit2/main.py"
+preview = "streamlit run --server.runOnSave=false --server.port 18501 --client.toolbarMode=minimal src/hello_streamlit2/main.py"
+
+
+[project.scripts]
+hello_streamlit2 = "hello_streamlit2.cli:run_app_prod"
