@@ -78,4 +78,4 @@ preview = "streamlit run --server.runOnSave=false --server.port 18501 --client.t
 
 
 [project.scripts]
-hello_streamlit2 = "hello_streamlit2.cli:run_app_prod"
+hello-streamlit2 = "hello-streamlit2.cli:run_app_prod"

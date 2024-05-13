@@ -1,3 +1,4 @@
+import argparse
 import os
 import sys
 
@@ -20,17 +21,26 @@ def run_app_dev():
     )
 
 
-def run_app_prod():
+def run_app_prod(port: int) -> None:
     run_app(
         [
             "streamlit",
             "run",
             "--server.runOnSave=false",
             "--client.toolbarMode=minimal",
-            "--server.port=18501",
+            f"--server.port={port}",
         ]
     )
 
 
+def parse_args(argv: list[str] = sys.argv[1:]) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(prog="hello-streamlit2")
+    parser.add_argument(
+        "-p", "--port", type=int, default=18501, help="Specify the port number"
+    )
+    return parser.parse_args(argv)
+
+
 if __name__ == "__main__":
-    run_app_prod()
+    args = parse_args()
+    run_app_prod(args.port)
