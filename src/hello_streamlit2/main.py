@@ -7,4 +7,4 @@ st.set_page_config(
 )
 
 st.title("Hello Streamlit! (with Hatch)")
-st.header("Streamlit is :blue[super cool] :sunglasses: :sunglasses:")
+st.header("Streamlit is :red[super hot] :sunglasses: :sunglasses:")
